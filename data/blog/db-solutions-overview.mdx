@@ -1,0 +1,185 @@
+---
+title: 'Databases overview'
+date: '2019-10-11'
+tags: ['Databases']
+draft: true
+summary: 'Overview of available storage technologies.'
+---
+
+# Introduction
+
+Databeses/storage systems are backbone of almost every system, when you start learning about system design you will encounter the matter of storing data right away.
+So let's enrich ourselves with 10k feet overview of modern day storage solutions. This article is just a beginning!
+
+## Relational Databases (SQL)
+
+Everybody heard about them - RDBMS are just classic and most common. Traditional row/column databases with ACID guarantees.
+
+- Oracle Database
+- Microsoft SQL Server
+- MySQL
+- MariaDB
+- PostgreSQL
+- IBM Db2
+- SAP HANA
+- SQLite
+- Amazon Aurora
+- CockroachDB
+- YugabyteDB
+- SingleStore (formerly MemSQ)
+
+## Key-Value Stores.
+
+Do you know what HashMap is...? Key-Value storages are quite simple, fast and flexible. Used as cache,
+
+- Redis
+- Amazon DynamoDB
+- Hazelcast
+- Riak
+- Aerospike
+- Berkeley DB
+- etcd
+- Consul
+
+## Document Stores
+
+- MongoDB
+- CouchDB
+- Couchbase
+- RethinkDB
+- RavenDB
+- ArangoDB
+
+## Wide-Column Stores
+
+- Apache Cassandra
+- ScyllaDB
+- HBase
+- Google Cloud Bigtable
+
+## Graph Databases
+
+- Neo4j
+- Amazon Neptune
+- TigerGraph
+- JanusGraph
+- ArangoDB (multi-model)
+- OrientDB
+
+## Multi-Model Databases
+
+- ArangoDB
+- OrientDB
+- MarkLogic
+- Cosmos DB (Microsoft)
+
+## Search Engines / Search Databases
+
+Technically data stores optimized for text search & analytics.
+
+- Elasticsearch
+- OpenSearch
+- Apache Solr
+- Meilisearch
+- Typesense
+
+## NewSQL Databases
+
+Distributed SQL databases with NoSQL scalability + SQL features.
+
+- CockroachDB
+- YugabyteDB
+- TiDB
+- Google Spanner
+- NuoDB
+
+## Data Warehouses / Analytics Databases
+
+Columnar, OLAP-optimized systems.
+
+- Snowflake
+- Google BigQuery
+- Amazon Redshift
+- Teradata
+
+## Embedded Databases
+
+Lightweight, often in apps or devices.
+
+- SQLite
+- RocksDB
+- H2 Database
+
+## Object Storage Systems
+
+Often cloud-based, optimized for unstructured blobs.
+
+- Amazon S3
+- MinIO
+- Ceph
+- OpenStack Swift
+- Google Cloud Storage
+- Azure Blob Storage
+
+## Distributed File Systems
+
+Used for large-scale, big data workloads.
+
+- HDFS (Hadoop Distributed File System)
+- GlusterFS
+- Lustre
+- MooseFS
+- Alluxio
+
+## Ledger / Blockchain Databases
+
+Immutable, append-only storage.
+
+- Hyperledger Fabric
+- BigchainDB
+- Amazon QLDB
+- Ethereum / Bitcoin (as specialized blockchains)
+
+---
+
+## Other data processing conepts and tools
+
+Once we listed some storage systems, let's see other related concepts.
+
+## Table Formats / Lakehouse Metadata Layers
+
+These provide ACID transactions, schema evolution, and time travel on top of data lakes (usually on Parquet/ORC files).
+
+- Apache Iceberg – open table format for huge analytic datasets
+- Delta Lake – from Databricks, now open source
+- Apache Hudi – stream-processing–friendly table format
+- Apache Drill – schema-on-read query layer
+
+## Data Lakes & Lakehouses
+
+Data lakes store raw, structured, semi-structured, and unstructured data at scale (often on cheap object storage). Lakehouses combine the flexibility of lakes with structured querying like warehouses.
+
+- Apache Hadoop (HDFS-based data lake)
+- AWS Lake Formation
+- Azure Data Lake Storage (ADLS)
+- Google Cloud Storage (as data lake foundation)
+- Databricks Lakehouse Platform
+- Snowflake (evolving into lakehouse capabilities)
+
+## Big Data Processing Frameworks
+
+These aren’t databases themselves, but they are storage+compute engines that make raw data usable.
+
+- Apache Spark – distributed compute for batch & streaming
+- Databricks – commercial platform around Spark & Delta Lake
+- Apache Flink – stream-first distributed processing
+- Presto / Trino – distributed SQL query engine
+- Apache Hive – SQL on Hadoop
+- Google Dataflow / Apache Beam – unified batch & stream pipelines
+
+Sources: <br />
+https://hazelcast.com/foundations/data-and-middleware-technologies/key-value-store/
+
+TODOS:
+
+File storage systems.
