@@ -1,6 +1,6 @@
 ---
-title: 'Load Balancers'
-date: '2025-11-18'
+title: 'Load Balancers – Introduction'
+date: '2026-03-25'
 tags: ['SystemDesign']
 draft: true
 summary: 'Software Load Balancing'
@@ -10,18 +10,17 @@ summary: 'Software Load Balancing'
 
 A **Load Balancer (LB)** distributes incoming traffic across multiple servers. This helps systems handle more requests, improves availability, and prevents individual instances from being overloaded.
 
+In this article, we’ll briefly walk through the most important aspects to consider when designing load balancers.
+
 ## How it works
 
-```
-client
-|
-v
-LB
-|
-+--> server1
-+--> server2
-+--> server3
+```mermaid
+   graph TD
+       Client[Client] --> LB[Load Balancer]
 
+       LB --> S1[Server 1]
+       LB --> S2[Server 2]
+       LB --> S3[Server 3]
 ```
 
 ## Load Balancer Use Cases
@@ -33,24 +32,24 @@ Traffic is distributed across regions. Key concepts include:
 - DNS-based Global LB
 - Anycast
 
-```
-internet -> global LB -> RegionA, RegionB
+```mermaid
+internet --> global LB --> RegionA, RegionB
 ```
 
 Many modern solutions use these principles.
 
 ### 2. Application-Level Load Balancing
 
-```
-client -> LB -> API servers
+```mermaid
+client ->> LB ->> API servers
 ```
 
 **Examples:** Nginx, HAProxy in HTTP mode, AWS ALB
 
 ### 3. Internal Services
 
-```
-Service A -> LB -> Service B instances
+```mermaid
+Service A ->> LB ->> Service B instances
 ```
 
 **Examples:** Route 53, Cloudflare DNS
@@ -135,7 +134,8 @@ Instead of mapping every session, the LB redirects requests based on a computed 
 
 ## Health Checks
 
-Load balancers monitor backend health and route traffic away from unhealthy servers.
+Load balancers monitor the health of backend servers and route traffic away from unhealthy ones. If multiple load
+balancer instances are used, they should also monitor each other.
 
 ---
 
@@ -152,20 +152,24 @@ Adding new backend instances horizontally.
 
 In geo-distributed systems, a global LB (using Anycast/DNS) directs traffic to different regions. Each region can scale its local LB horizontally.
 
-```
-client
-  |
-  v
-+-----------+
-| Global LB |
-+-----------+
-|
-+---+---+
-| |
-RegionA RegionB
-LB LB
-/ | \ / |
-s1 s2 s3 s1 s2 s3
+```mermaid
+graph TD
+    Client[Client] --> GLB[Global Load Balancer]
+
+    GLB --> RALB[Region A LB]
+    GLB --> RBLB[Region B LB]
+
+    RALB --> RA1[Region A - Server 1]
+    RALB --> RA2[Region A - Server 2]
+    RALB --> RA3[Region A - Server 3]
+
+    RBLB --> RB1[Region B - Server 1]
+    RBLB --> RB2[Region B - Server 2]
+    RBLB --> RB3[Region B - Server 3]
 ```
 
----
+### Summary
+
+As you can see, there are many things to think about. We’ll go through each of them in the upcoming articles.
+
+Thanks for reading!
