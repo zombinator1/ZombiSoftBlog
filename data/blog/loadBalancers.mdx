@@ -33,7 +33,11 @@ Traffic is distributed across regions. Key concepts include:
 - Anycast
 
 ```mermaid
-internet --> global LB --> RegionA, RegionB
+   graph TD
+       Internet --> GLB[Global Load Balancer]
+
+       GLB --> R1[Region A]
+       GLB --> R2[Region B]
 ```
 
 Many modern solutions use these principles.
@@ -41,7 +45,9 @@ Many modern solutions use these principles.
 ### 2. Application-Level Load Balancing
 
 ```mermaid
-client ->> LB ->> API servers
+    graph TD
+      Client --> LB[Load Balancer]
+      LB --> apiServers[API servers]
 ```
 
 **Examples:** Nginx, HAProxy in HTTP mode, AWS ALB
@@ -49,7 +55,9 @@ client ->> LB ->> API servers
 ### 3. Internal Services
 
 ```mermaid
-Service A ->> LB ->> Service B instances
+    graph TD
+A[Service A] --> LB[Load Balancer]
+LB --> S[Service B instances]
 ```
 
 **Examples:** Route 53, Cloudflare DNS
@@ -110,9 +118,13 @@ Load balancers can operate at different layers of the OSI model:
 
 ---
 
-## Sending Requests to the Same Server
+## Handling Requests Across Multiple Servers
 
-Some applications store state locally (e.g., e-commerce carts). If a user hits a different server, they may lose their session.
+In distributed systems, user requests are often routed through a load balancer to multiple backend servers. This creates
+a challenge when applications rely on local session state—for example, shopping carts in e-commerce systems. If a user’s
+request is routed to a different server, their session data may be lost.
+
+To solve this, several strategies are commonly used:
 
 ### Sticky Session
 
