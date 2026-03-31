@@ -4,27 +4,19 @@ import tsParser from '@typescript-eslint/parser'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import js from '@eslint/js'
-import { FlatCompat } from '@eslint/eslintrc'
+import nextConfig from 'eslint-config-next/core-web-vitals'
+import prettierRecommended from 'eslint-plugin-prettier/recommended'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
 
 export default [
   {
     ignores: [],
   },
   js.configs.recommended,
-  ...compat.extends(
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended',
-    'next',
-    'next/core-web-vitals'
-  ),
+  ...nextConfig,
+  prettierRecommended,
   {
     plugins: {
       '@typescript-eslint': typescriptEslint,
